@@ -1,337 +1,144 @@
-# Leetcode Python Guide
+# Leetcode Python Guide         Created by Alex Eum
 
-#Multiple assignment
-n, m = 0, "abc"
+#Individuals----------------------------------------------------------------------------------------
+n, m = 0, "abc"     #Multiple assignment
+a, b, c = [1, 2, 3] #Unpacking, variables to array, number must equal length
+n = None            #None instead of null
 
-#increment, cannot do n++
-n = n + 1
-n += 1
+if n>2: ...     #if statement
+elif n==2: ...
+else: ...
 
-#None replace null
-n=4
-n = None
+#Loops----------------------------------------------------------------------------------------
+while n<5: ... #while
 
-#if statement
-if n>2:
-    n-=1
-elif n==2:
-    n-=2
-else:
-    n-=3
+for i in range(5):...         #for loop, 0 to 4    (last exclusive)
+for i in range(2,6):...       #for loop, 2 to 5    (last exclusive)
+for i in range(5, 1, -1):...  #decreasing for loop, 5 to 2
 
-#while
-while n<5:
-    n+=5
+#Math----------------------------------------------------------------------------------------
+n = n + 1;   n += 1 #Increment, no n++
 
-#for loop (incremented automatically)
-    #goes 0 to 4
-    for i in range(5):
-        print(i)
+print(5/2)       # /  is decimal division, returns 2.5
+print(5//2)      # // is integer division, returns 2, rounds down (even negative),  2.5 -> 2
+print(-3//2)     # // is integer division, return -2, rounds down (even negative), -1.5 -> 2
+print(int(-3/2)) # / decimal division, cast to int, returns -1 correctly
 
-    #goes from 2 to 5, last number in range excluded
-    for i in range(2,6):
-        print(i)
-    #decrement (must specify), goes from 5 to 2
-    for i in range(5, 1, -1):
-        print(i)
-
-
-#division is decimal, will return 2.5
-print(5/2)
-
-#integer division (always rounds down, even negative)
-print(5//2) #2, since 2.5 rounded down
-print(-3//2) #-2, since -1.5 rounded down
-
-#use standard decimal division, conver to int
-print(int(-3/2)) #returns -1 correctly
-
-#modulo, different when negative
-print(10 % 3) #returns 1
-print(-10 % 3) #returns 2
-
-#import math helpers
-import math
+print(10 % 3)            #modulo remainder, returns 1
+print(-10 % 3)           #modulo remainder, returns 2 wrong (negative round down decimal division)
+import math              #import math helpers
 print(math.fmod(-10, 3)) #returns -1 correctly
 
 print(math.floor(3/2)) #down to nearest int
-print(math.ceil(3/2)) #up to nearest int
-print(math.sqrt(2)) 
-print(math.pow(2,3)) #like 2^3
+print(math.ceil(3/2))  #up   to nearest int
+print(math.sqrt(2))    #sqrt to decimal
+print(math.pow(2,3))   #exp  to decimal
 
-#default max/min
-float("inf") #max
-float("-inf") #min
-#python numbers are infinite, never overflow
+float("inf")  #default max value
+float("-inf") #default min value
+print(math.pow(2, 200) < float("inf")) #True, 2^200 less than infinity
 
-print(math.pow(2, 200)) #less than infinity
-print(math.pow(2, 200) < float("inf")) #true
+#Arrays---------------------------------------------------------------------------------------
+arr = [1, 2, 3, 4, 5]  #Initialize defined
+print(arr)             #[1, 2, 3, 4, 5]
+print(len(arr))        #Returns 3
 
-#--------------------------------------------------------------------------------------------
-#Arrays
+size = 5               #Define length
+nums = [1] * size      #Initialize repetitive: [1, 1, 1, 1, 1]
 
-arr = [1, 2, 3] 
-print(arr)      #1, 2, 3
-print(len(arr)) #returns 3
+arr = [i for i in range(5)]       #List Comprehension, gets i: [0,1,2,3,4]
+arr = [i+i for i in range(5)]     #List comprehension, gets i+i: [0,2,4,6,8]
 
-#Python arrays are dynamic by default, can be used like stacl
-arr.append(4) #1, 2, 3, 4
-arr.append(5) #1, 2, 3, 4, 5
-arr.pop()     #1, 2, 3, 4
+arr = [ [0]*4 for i in range(4) ] #2D List: makes 4x4 list of 0's (index 0 to 3, each as list of 4 zeros)
 
-#Can insert into the middle, puts value at index
-# O(n) operation
-arr.insert(1, 7) #1, 7, 2, 3, 4
+arr.append(4)     #Python arrays dynamic, like stack
+arr.append(5)     #Adds to end,        O(1) constant
+arr.pop()         #Removes from end,   O(1) constant
+arr.insert(1, 7)  #Insert at index,    O(n) linear
+arr[0] = 0        #Index/Change value, O(1) constant
+print(arr[-1])    #Access last value (if doesn't exist, error)
+print(arr[-2])    #Access 2nd to last value (if doesn't exist, error) 
 
-#Indexing is constant time, can assign
-# O(1) operation
-arr[0] = 0
+nums.reverse()                 #Reverses array,      O(n) linear
+arr.sort()                     #Sort array ascending (increasing or alphabetical)
+brr = sorted(arr)              #Store sorted array ascending in new variable
+arr.sort(reverse=True)         #Sort array descending
+arr.sort(key=lambda x: len(x)) #Lambda sort, key = length, ascending
 
-#Initialize array of size n with default value of 1
-size = 5
-arr = [1] * size #1, 1, 1, 1, 1
+print(arr[1:3]) #Slicing/Sublist, array[start:end] (end exclusive): [2, 3]
+print(arr[0:4]) #Slicing/Sublist, array[start:end] (end exclusive): [1, 2, 3, 4]
 
-#When indexing, -1 is last value, -2 second to last
-#if not enough, will then index out of bounds
-arr = [1, 2, 3] 
-print(arr[-1]) #prints 3
-print(arr[-2]) #prints 2
+for n in nums:...                                 #Array Loop, n is value
+for n in reversed(nums):...                       #Array loop, n is value
+for i in range(len(nums)):...                     #Array Loop, i is index, nums[i] is value
+for i, n in enumerate(nums):...                   #Array Loop, i is index, n is value
+for i, num in reversed(list(enumerate(nums))):... #Array Loop: reverse ( list ( enumerate (nums
+for n1, n2 in zip(arr, nums):...                  #Zip gets same index element of 2 arrays simultaneously
 
-#Slicing & Sublists
-arr = [1,2,3,4]
-#prints index 1 to 3, not including last
-print(arr[1:3]) # returns 2, 3
-print(arr[0:4]) #returns 1, 2, 3, 4
+#String Logic------------------------------------------------------------------------------
+s = "abc"; s = 'abc'
 
-#unpacking, variable to array assignment
-#must make sure number of variables on left matches length of array
-a, b, c = [1, 2, 3]
-nums = [1, 2, 3]
+s[0] = "A"     #Strings immutable, error
+s += "def"     #Update/Create new string, O(n) linear: 'abcdef'
+print(s[0:2])  #String slicing: index 0 to 1 (end exclusive)
 
-#loop through array with index via range(len)
-for i in range(len(nums)):
-    print(nums[i]) #we have index
+print(int("123") + int("123"))    #String to Int, addition
+print(str(123) + str(123))        #Int to String, concatenation
+print(ord("a")); print(ord("b"))  #ASCII Value of char: 97, 98
 
-#loop through array with actual value
-for n in nums:
-    print(n) #we have value
-
-#loop through array with index and value
-for i, n in enumerate(nums):
-    print(i, n) #i is index, n is value
-
-#for loop values in a reversed list
-for num in reversed(nums):
-    print(num)
-
-#enumerate on its own is not reversiblee
-#must turn enumerate into a list
-for i, num in reversed(list(enumerate(nums))):
-    print(i, num)
-
-
-#loop through multiple arrays simultaneously with zip
-nums1 = [1, 3, 5]
-nums2 = [2, 4, 6]
-for n1, n2 in zip(nums1, nums2):
-    print(n1, n2)
-    #1 2
-    #3 4
-    #5 6
-
-#reverse array
-nums = [1, 2, 3]
-nums.reverse()
-print(nums) #[3, 2, 1]
-
-#sorting numbers (ascending default)
-arr = [5, 4, 7, 3, 8]
-arr.sort()
-print(arr) #3, 4, 5, 7, 8
-
-#sort in descending (reverse order)
-arr.sort(reverse=True)
-print(arr) #8, 7, 5, 4, 3
-
-#sorting string (alphabetical default)
-arrName = ["bob", "alice", "jane", "doe"]
-arr.sort() 
-print(arr) #['alice', 'bob', 'doe', 'jane]
-
-#custom sorting of string array with lambdas
-#take each value in array, treat it (key) as its length,
-#sort by the key
-#so this will sort by increasing length of string
-#string mapped to its length
-arr.sort(key=lambda x: len(x))
-
-#list comprehension
-#add default 0 to 4 into array
-arr = [i for i in range(5)]
-print(arr) # [0,1,2,3,4]
-
-#modify numbers before adding to array
-arr = [i+i for i in range(5)]
-print(arr) #0, 2, 4, 6, 8
-
-#------------------------------------------------------------------------------
-#2D Lists
-
-#makes 4 lists (indexed 0,1,2,3) each with 4 zero's (rows unique)
-#4x4 list
-arr = [ [0]*4 for i in range(4)]
-
-#------------------------------------------------------------------------------
-#String Logic
-
-s = "abc"
-s = 'abc'
-
-#Strings are immutable
-s[0] = "A" #will not work
-
-#Can 'update' or create new string
-# O(n) time operation
-s += "def"
-print(s) #abcdef
-
-#string slicing
-print(s[0:2]) #gets from index 0 to 1 (last index exclusive)
-
-
-#String Integer conversions valid both ways
-print(int("123") + int("123")) #246, addition
-print(str(123) + str(123)) #123123, concatenation
-
-#ASCII value of a char
-print(ord("a")) #97
-print(ord("b")) #98
-
-#combine list of strings (with empty string delimitor)
-#delimitor is what goes in between combined strings
-#usually empty "" or comma ","
 strings = ["ab", "cd", "ef"]
-print("".join(strings)) #abcdef
+print("".join(strings)) #String Combine with "" delimitor: "abcdef"
 
-
-#------------------------------------------------------------------------------
-#Queues (double ended deques by default)
+#Queues (deques)------------------------------------------------------------------------------
 from collections import deque
+queue = deque()      #Creation
 
-queue = deque()
-queue.append(1)
-queue.append(2)
+queue.append(2)      #Append right,       O(1) constant
+queue.appendleft(1)  #Append left,        O(1) constant
+print(queue)         #Print: deque([1,2])
+queue.pop()          #Pop right,          O(1) constant
+queue.popleft()      #Pop left,           O(1) constant
 
-print(queue) #deque([1,2])
+#Hashset (No Duplicate)------------------------------------------------------------------------------
+mySet = set()                   #Creation
+mySet2 = {i for i in range (5)} #Set comprehension, manual definition: {0, 1, 2, 3, 4}
+mySet3 = set([1,2,3,1,2])       #List to set, removes duplicates: {1, 2, 3}
 
-#left pop constant time operation, O(1)
-queue.popleft()
-print(queue) #deque([2])
+mySet.add(1); mySet.add(2)      #Adding,    O(1) constant
+mySet.remove(2)                 #Remove.    O(1) constant
+print(mySet)                    #Print: {1, 2}
+print(len(mySet))               #Length: 2
 
-#can add to the left
-queue.appendleft(1)
-print(queue) #deque([1,2])
+print(1 in mySet)               #Existence search, True  O(1) constant
+print(2 in mySet)               #Existence search, False O(1) constant
 
-#right pop 
-queue.pop()
-print(queue) #deque([1])
+#Hashmap (No Duplicate Key)------------------------------------------------------------------------------
+myMap0 = {}                           #Empty Creation
+myMap = {'alice': 88, 'bob': 77}      #Defined Creation
+myMap1 = { i: i*2 for i in range (3)} #Map comprehension: {0: 0, 1: 2, 2: 4}
 
+myMap["jack"] = 90                    #Inserts map[key]=value pairs,           O(1) constant
+myMap["bob"] = 77                     #Updates map[key]=value pairs (exists),  O(1) constant
+myMap.pop("Alice")                    #Pop key, must exist or error,           O(1) constant
+print("alice" in myMap)               #Existence search: True                  O(1) constant
+print(len(myMap))                     #Number of keys: 2
 
-#------------------------------------------------------------------------------
-#Hashset, does not allow duplicate
-#search and insert and remove in constant time O(1)
+for i in myMap:...                    #Loop through map, i as key,   myMap[i] as value
+for val in myMap.values():...         #Loop through map,             val as value     from map.values()
+for key, val in myMap.items():...     #Loop through map, key as key, val as value     from map.items()
 
-mySet = set()
-mySet.add(1)
-mySet.add(2)
-print(mySet) #{1, 2}
-print(len(mySet)) #2
+#Tuple (Immutable Array)------------------------------------------------------------------------------
+tup = (1, 2, 3)                  #Creation
+print(tup)                       #(1, 2, 3)
+print(tup[0]); print(tup[-1])    #Can index, can't modify: 0, 3
 
-#search with 'in' operator
-print(1 in mySet) #True
-print(3 in mySet) #False
+myMap = {(1,2): 3}               #Tuple as key for hashmap, (1,2) is a key
+print(myMap[(1,2)])              #Get value: 3
 
-#remove
-mySet.remove(2)
-print(2 in mySet) #False
+mySet = set(); mySet.add((1,2))  #Tuple as key for hashset, (1,2) is an element
+print((1,2) in mySet)            #Existence search: True
 
-#list to set
-print(set([1,2,3]))
-
-#set comprehension, manually initialize
-mySet = {i for i in range (5)} #0, 1, 2, 3 4
-
-#------------------------------------------------------------------------------
-#Hashmap
-#cannot have duplicate keys
-
-#empty
-myMap = {}
-
-#initialize with value
-myMap = {'alice': 88, 'bob': 77}
-
-#insert with key to value
-myMap["alice"] = 88
-myMap["bob"] = 77
-print(myMap) #{'alice': 88, 'bob': 77}
-
-#len is number of keys
-print(len(myMap)) #2
-
-#modify value mapped to a key
-myMap["alice"] = 88
-
-#search if a key exists, constant time
-print("alice" in myMap) #True
-
-#remove key in constant O(1) time, must exist or error (check first)
-myMap.pop("Alice")
-
-#dict comprehension
-myMap = { i: i*2 for i in range (3)} #{0: 0, 1: 2, 2: 4}
-
-
-#looping through map with key
-for key in myMap:
-    print(key, myMap[key])
-
-#loop through map with direct values via .values() (if we dont need key)
-for val in myMap.values():
-    print(val)
-
-#loop through key and values via .items()
-for key, val in myMap.items():
-    print(key, val)
-
-#------------------------------------------------------------------------------
-#Tuples
-#arrays but immutable
-
-tup = (1, 2, 3)
-print(tup) #1, 2, 3
-
-#can index
-print(tup[0])
-print(tup[-1])
-#can't modify
-
-#use tuples as key for hashmap
-#map a pair of values (1,2) to 3
-myMap = { (1,2): 3}
-print(myMap[(1,2)]) #3
-
-#use tuples as key for hashset
-mySet = set()
-mySet.add((1,2))
-print((1,2) in mySet) #True
-
-#lists cannot be keys due to their mutability
-#tuples are good for keys because they can't be changed
-
-
-#------------------------------------------------------------------------------
-#Heaps
+#Heaps------------------------------------------------------------------------------
 #find min and max, implemented as ararys in python
 import heapq
 
