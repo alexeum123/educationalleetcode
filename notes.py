@@ -1,6 +1,6 @@
-# Leetcode Python Guide         Created by Alex Eum
+# Leetcode Python Guide    :    Created by Alex Eum
 
-#Individuals----------------------------------------------------------------------------------------
+#Individuals--------------------------------------------------------------------------------------------
 n, m = 0, "abc"     #Multiple assignment
 a, b, c = [1, 2, 3] #Unpacking, variables to array, number must equal length
 n = None            #None instead of null
@@ -9,14 +9,14 @@ if n>2: ...     #if statement
 elif n==2: ...
 else: ...
 
-#Loops----------------------------------------------------------------------------------------
+#Loops--------------------------------------------------------------------------------------------------
 while n<5: ... #while
 
 for i in range(5):...         #for loop, 0 to 4    (last exclusive)
 for i in range(2,6):...       #for loop, 2 to 5    (last exclusive)
 for i in range(5, 1, -1):...  #decreasing for loop, 5 to 2
 
-#Math----------------------------------------------------------------------------------------
+#Math---------------------------------------------------------------------------------------------------
 n = n + 1;   n += 1 #Increment, no n++
 
 print(5/2)       # /  is decimal division, returns 2.5
@@ -38,7 +38,7 @@ float("inf")  #default max value
 float("-inf") #default min value
 print(math.pow(2, 200) < float("inf")) #True, 2^200 less than infinity
 
-#Arrays---------------------------------------------------------------------------------------
+#Arrays--------------------------------------------------------------------------------------------------
 arr = [1, 2, 3, 4, 5]  #Initialize defined
 print(arr)             #[1, 2, 3, 4, 5]
 print(len(arr))        #Returns 3
@@ -75,7 +75,7 @@ for i, n in enumerate(nums):...                   #Array Loop, i is index, n is 
 for i, num in reversed(list(enumerate(nums))):... #Array Loop: reverse ( list ( enumerate (nums
 for n1, n2 in zip(arr, nums):...                  #Zip gets same index element of 2 arrays simultaneously
 
-#String Logic------------------------------------------------------------------------------
+#String Logic--------------------------------------------------------------------------------------------
 s = "abc"; s = 'abc'
 
 s[0] = "A"     #Strings immutable, error
@@ -89,7 +89,7 @@ print(ord("a")); print(ord("b"))  #ASCII Value of char: 97, 98
 strings = ["ab", "cd", "ef"]
 print("".join(strings)) #String Combine with "" delimitor: "abcdef"
 
-#Queues (deques)------------------------------------------------------------------------------
+#Queues (deques)-----------------------------------------------------------------------------------------
 from collections import deque
 queue = deque()      #Creation
 
@@ -99,7 +99,7 @@ print(queue)         #Print: deque([1,2])
 queue.pop()          #Pop right,          O(1) constant
 queue.popleft()      #Pop left,           O(1) constant
 
-#Hashset (No Duplicate)------------------------------------------------------------------------------
+#Hashset (No Duplicate)----------------------------------------------------------------------------------
 mySet = set()                   #Creation
 mySet2 = {i for i in range (5)} #Set comprehension, manual definition: {0, 1, 2, 3, 4}
 mySet3 = set([1,2,3,1,2])       #List to set, removes duplicates: {1, 2, 3}
@@ -127,7 +127,7 @@ for i in myMap:...                    #Loop through map, i as key,   myMap[i] as
 for val in myMap.values():...         #Loop through map,             val as value     from map.values()
 for key, val in myMap.items():...     #Loop through map, key as key, val as value     from map.items()
 
-#Tuple (Immutable Array)------------------------------------------------------------------------------
+#Tuple (Immutable Array)---------------------------------------------------------------------------------
 tup = (1, 2, 3)                  #Creation
 print(tup)                       #(1, 2, 3)
 print(tup[0]); print(tup[-1])    #Can index, can't modify: 0, 3
@@ -138,139 +138,56 @@ print(myMap[(1,2)])              #Get value: 3
 mySet = set(); mySet.add((1,2))  #Tuple as key for hashset, (1,2) is an element
 print((1,2) in mySet)            #Existence search: True
 
-#Heaps------------------------------------------------------------------------------
-#find min and max, implemented as ararys in python
+#Heaps (Min/Max)-----------------------------------------------------------------------------------------
 import heapq
+minHeap = [] #Creation, minHeap by default (min at index 0) (not sorted)
+heapq.heappush(minHeap, 3);heapq.heappush(minHeap, 1)    #Adds 3 and 1 to minHeap,   stores as [1, 3]
+print(minHeap[0])                                        #Returns min: 1
+while len(minHeap): print(heapq.heappop(minHeap))        #Pop values, comes out smallest to largest
 
-#by default, heaps in pythons are minHeaps
-#so min is always at index 0, heap not necessarily sorted though
-minHeap = []
-heapq.heappush(minHeap, 3) #add 3 to that minHeap
-heapq.heappush(minHeap, 2) #add 2 to that minHeap
-heapq.heappush(minHeap, 1) #add 1 to that minHeap
-print(minHeap[0]) #returns 1, the min
+maxHeap = [] #Creation, maxHeap by negating pushed values, un-negate popped values
+heapq.heappush(maxHeap, -3); heapq.heappush(maxHeap, -1) #Adds -3 and -1 to maxHeap, stores as [-3, 1]
+print(-1 * maxHeap[0])                                   #Returns max: 3
+while len(minHeap): print(-1 * heapq.heappop(minHeap))   #Pop values, comes out largest to smallest
 
-#pop values, will come out smallest to largest
-#since smallest always at index 0
-while len(minHeap): 
-    print(heapq.heappop(minHeap))
+heapq.heapify([2, 1, 8, 4, 5])                           #Build heap from array in O(n) linear
+while arr: print(heapq.heappop(arr))                     #Pop values, comes out largest to smallest
 
+#Functions-----------------------------------------------------------------------------------------------
+def myFunct(n, m): return n*m   #Function definition
+print(myFunct(3,4))             #Function execution
 
-#no max heap, but just multiply each value by -1 while pushing
-#and multiply by -1 when popping
-maxHeap = []
-heapq.heappush(maxHeap, -3)
-heapq.heappush(maxHeap, -2)
-heapq.heappush(maxHeap, -4)
-
-#Max always at index 0
-#multiply by -1 to revert/undo initial -1 multiplication
-print(-1 * maxHeap[0])
-
-while len(minHeap): 
-    print(-1 * heapq.heappop(minHeap))
-
-#build heap in linear time from values with heapify
-arr = [2, 1, 8, 4, 5]
-heapq.heapify(arr) #turn into heap
-
-while arr:
-    print(heapq.heappop(arr)) #will print values smallest to largest
-
-
-#------------------------------------------------------------------------------
-#Functions
-    
-def myFunct(n, m):
-    return n*m
-
-print(myFunct(3,4))
-
-#nested functions
-#inner functions have access to outer variables
-def outer(a, b):
-    c = "c"
-    def inner():
-        return a + b + c
-
-#can modify objects but not reassign unless using nonlocal keyword
-def double(arr, val2):
-    def helper():
-        #modify array
-        for i, n in enumerate(arr):
-            arr[i] *2 #will modify original array
+def outer(a, b):                  #Outer Function
+    c = "c" 
+    def inner(): return a + b + c #Nested Function, has access to outer variable c
         
-        #will only modify the val in helper scope
-        val *= 2 #value is still original outside of helper
-
-        #to update value everywhere (outside helper scope)
-        #set as nonlocal
-        nonlocal val2 
-        val2 *=2
-    
+def double(arr, val):
+    def helper():
+        for i, n in enumerate(arr):
+            arr[i] *= 2 #Modifies original array original array
+        nonlocal val    #Since val defined outside of scope (not in double), must set nonlocal to access
+        val *=2
     helper()
     print(arr, val)
+    
+nums = [1,2]; val = 3; double(nums, val) #Successfully modified array and val: [2,4] 6
 
-nums = [1,2]
-val = 3
-double(nums, val) #[2,4] 6
-#successfully doubled both bc arrays modify regardless
-#value modified using nonlocal keyword
+#Class----------------------------------------------------------------------------------------------------
+class myClass:                      #Class creation, self required param for every function
 
+    def __init__(self, nums):       #Constructor, nums additional parameter
+        self.nums = nums            #Create member variable nums
+        self.size = len(nums)       #Create member variable size
 
-
-#------------------------------------------------------------------------------
-#Class
-
-#self is passed into every method of a class, like this keyword
-class myClass:
-    #Constructor
-    def __init__(self, nums): #nums we choose to pass in
-        #create member variables
-        self.nums = nums
-        self.size = len(nums)
-
-    #self key word required as parameter
-    #access to member variable
-    def getLength(self):
+    def getLength(self):            #Access method to member variable size
         return self.size
     
     #call member function
-    def getDoubleLength(self):
+    def getDoubleLength(self):      #Call member function getLength within member function
         return 2 * self.getLength()
     
+obj = myClass([1,2,3])              #Create object of class
+print(obj.getLength())              #Call member function from object: 3
+#---------------------------------------------------------------------------------------------------------
 
     
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
